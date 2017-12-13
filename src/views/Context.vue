@@ -742,12 +742,8 @@
     }
   }
   .t-active {
-  // $thema-color: #0f88eb;
     font-weight: 600;
     color: $thema-color;
-    // color: #0f88eb;
-    // background: $thema-color;
-    // border-radius: 40;
   }
   .title-list {
     padding-left: 0;
