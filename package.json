@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --progress --colors --env.development --hot",
     "dist": "webpack --progress --env.production",
     "dev-wp": "webpack --progress --colors --env.development",
-    "build": "webpack --progress --env.production",
+    "build": "npm run dist && (forever stop index.js & forever start index.js)",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
