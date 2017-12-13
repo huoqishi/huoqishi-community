@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "env", {
+        "targets": {
+          "chrome": 45,
+          "ie": 9
+        },
+        "modules": false,
+        "exclude": ["transform-regenerator"]
+      }
+    ],
+    "stage-0"
+  ],
+  // 处理 import('..') 语法
+  "plugins": ["syntax-dynamic-import"]
+}
