@@ -745,7 +745,6 @@
     font-weight: 600;
     color: $thema-color;
   }
-
   .title-list {
     padding-left: 0;
     .title-item {
