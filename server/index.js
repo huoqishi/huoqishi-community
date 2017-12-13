@@ -1,6 +1,6 @@
 // const path = require('path')
 const express = require('express')
-const fileInfo = require('./build/fileinfo.js')
+const fileInfo = require('../build/fileInfo.js')
 const app = express()
 app.use(express.static(fileInfo.path))
 app.listen(8082, err => {
