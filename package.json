@@ -6,6 +6,7 @@
   "scripts": {
     "dll": "webpack --progress --config ./webpack.dll.config.js",
     "dev": "webpack-dev-server --progress --colors --env.development --hot",
+    "dist": "webpack --progress --env.production",
     "dev-wp": "webpack --progress --colors --env.development",
     "build": "webpack --progress --env.production",
     "test": "echo \"Error: no test specified\" && exit 1"
