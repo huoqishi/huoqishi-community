@@ -4,11 +4,11 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "dll": "webpack --progress --config ./webpack.dll.config.js",
+    "dll": "webpack --progress --config ./build/webpack.dll.config.js",
     "dev": "webpack-dev-server --progress --colors --env.development --hot",
     "dist": "webpack --progress --env.production",
     "dev-wp": "webpack --progress --colors --env.development",
-    "build": "npm run dist && (forever stop server/index.js & forever start server/index.js)",
+    "build": "npm run dist && (forever stop build/server/index.js & forever start build/server/index.js)",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,7 +16,6 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",
-    "babel-preset-stage-0": "^6.24.1",
     "normalize.css": "^7.0.0",
     "vue": "^2.5.9",
     "vue-router": "^3.0.1",
@@ -28,19 +27,26 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
+    "happypack": "^4.0.0",
     "html-webpack-plugin": "^2.30.1",
+    "lodash": "3.10.1",
     "node-sass": "^4.7.2",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
+    "scss-loader": "^0.0.1",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
     "vue-loader": "^13.5.0",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.9",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.5"
+    "webpack-dev-server": "^2.9.5",
+    "webpack-merge": "^4.1.1",
+    "webpack-parallel-uglify-plugin": "^1.0.2"
   },
   "standard": {
     "globals": [

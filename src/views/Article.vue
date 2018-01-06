@@ -3,7 +3,8 @@
   $type-height: 59px;
   $boxmin-width: 1000px;
   @import url('../assets/css/base.scss');
-  .home {
+  @import url('../assets/css/github-markdown.css');
+  .context {
     .main {
       display: flex;
       justify-content: flex-stretch;
@@ -32,13 +33,17 @@
       }
     }
   }
+  .t-active {
+    font-weight: 600;
+    color: $thema-color;
+  }
   .title-list {
     padding-left: 0;
     .title-item {
       margin-top: 16px;
       list-style: none;
       background: #fff;
-      padding: 16px;
+      padding: 16px 20px;
       .t-type {
         color: #8590a6;
         font-size: 16px;
@@ -70,34 +75,6 @@
         margin: 16px 0;
         &:hover {
           color: #175199;
-        }
-      }
-      .t-summary {
-        display: flex;
-        .t-cover {
-          margin-right: 16px;
-          width: 190px;
-          height: 100px;
-          overflow: hidden;
-          img {
-            width: 100%;
-            cursor: pointer;
-          }
-        }
-        .t-inner {
-          flex: 1;
-          font-size: 15px;
-          height: 100px;
-          color: #262626;
-          overflow: hidden;
-          cursor: pointer;
-          .t-text {
-            
-            line-height: 24px;
-          }
-          &:hover {
-            color: #6f6f6f;
-          }
         }
       }
     }
@@ -132,25 +109,24 @@
     margin-right: 8px;
   }
 </style>
+
 <template>
-  <div class="home">
+<div class="context">
     <Header2 />
     <div class="main">
       <div class="main-center">
       <div class="type">
         <ul class="type-list">
-          <li class="type-item">JavaScript</li>
+          <li class="type-item t-active">JavaScript</li>
+          <li class="type-item t-active">ES6</li>
           <li class="type-item">Vue</li>
-          <li class="type-item">React</li>
+          <li class="type-item t-active">React</li>
           <li class="type-item">Webpack</li>
           <li class="type-item">Angular2</li>
-          <li class="type-item">ES6</li>
         </ul>
      </div>
      <ul class="title-list">
        <li
-        v-for="item in list"
-        :key="item.id"
         class="title-item">
         <div class="t-type">来自分类: JavaScript</div>
         <div class="t-uinfo">
@@ -160,17 +136,9 @@
           <span class="t-name">火骑士空空</span>
           <span class="t-motto">让多变成美的骏马，和你驰骋在天涯!!!</span>
         </div>
-        <router-link :to="{name: 'articles', params: {id: item.id}}">
-          <h3 class="t-title">{{item.title}}</h3>
-          <div class="t-summary">
-              <div class="t-cover">
-                <img src="../assets/img/tmp.jpg"/>
-              </div>
-              <div class="t-inner">
-                  <span class="t-text"><div v-html="item.content"></div><a>阅读全文</a></span>
-              </div>
-          </div>
-        </router-link>
+        <h3 class="t-title">{{article.title}}</h3>
+        <div class="content markdown-body" v-html="article.content">
+        </div>
         <div class="tool-bar">
           <ul class="tb-list">
             <li class="tb-item">阅读(199)</li>
@@ -181,7 +149,7 @@
      </ul>
     </div>
     <div class="main-right">
-      <div class="mr-a"></div>
+      <div class="mr-a">我是中国人，我爱自己的祖国1111</div>
       <div class="mr-b"></div>
     </div>
     </div>
@@ -189,34 +157,28 @@
 </template>
 <script>
 import Header2 from './Header'
-console.log(123)
 export default {
   components: {
     Header2
   },
   data () {
     return {
-      left: 0,
-      list: [],
-      page: 0, // 当前是第几页
-      total: null // 共多少条数据
-
+      id: null,
+      article: {}
     }
   },
   created () {
-    this.loadList()
-  },
-  mounted () {
-    // 顶部条滚动问题
-    window.onscroll = (e) => {
-      const topLeft = document.body.scrollLeft || document.documentElement.scrollLeft
-      this.left = -topLeft
-    }
+    this.init()
+    this.loadArticle()
   },
   methods: {
-    loadList () {
-      this.$axios.get('/api/articles').then(({data}) => {
-        this.list = data.result
+    init () {
+      console.log(this)
+      this.id = this.$route.params.id
+    },
+    loadArticle () {
+      this.$axios.get('/api/articles/' + this.id).then(({data}) => {
+        this.article = data.result
       })
     }
   }

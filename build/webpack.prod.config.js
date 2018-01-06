@@ -1,6 +1,8 @@
 const rm = require('rimraf')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
+// 并行压缩
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const base = require('./webpack.base.config')
 const file = require('./fileInfo.js')
 const loaders = require('./loaders.js')
@@ -23,7 +25,19 @@ let config = {
       template: 'index.html',
       filename: 'index.html'
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    // new webpack.optimize.UglifyJsPlugin(),
+    new ParallelUglifyPlugin({
+      // cacheDir: '.cache/',
+      uglifyJS: {
+        output: {
+          comments: false
+        },
+        pure_funcs: ['console.log'], // 移除console.log
+        compress: {
+          warnings: false
+        }
+      }
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: ['vender', 'manifest']
     })

@@ -12,6 +12,7 @@
     ],
     "stage-0"
   ],
+  // "cacheDirectory": true,
   // 处理 import('..') 语法
   "plugins": ["syntax-dynamic-import"]
 }

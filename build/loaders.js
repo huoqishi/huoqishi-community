@@ -1,10 +1,31 @@
+const os = require('os')
+const path = require('path')
+// const HappyPack = require('happypack')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 const file = require('./fileInfo.js')
+// 获取绝对路径
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+//
+// var cssLoader = ExtractTextPlugin.extract({
+//   use: [
+//     'happypack/loader?id=happy-css'
+//   ]
+// })
+
 const loaders = [
   {
     test: /\.vue$/,
     loader: 'vue-loader', // loader not use
+    exclude: /node_modules/,
+    include: [resolve('src')],
+    // options:
     options: {
+      minimize: process.env.NODE_ENV === 'production',
       loaders: {
+        // 'js': 'happypack/loader?id=happy-babel-vue',
         'scss': [
           'vue-style-loader',
           'css-loader',
@@ -27,9 +48,10 @@ const loaders = [
     use: ['style-loader', 'css-loader', 'scss-loader']
   },
   {
-    test: /\.js/,
-    use: ['babel-loader'],
-    exclude: /node_modules/
+    test: /\.js[x]?$/,
+    exclude: /node_modules/,
+    include: [resolve('src')],
+    loader: ['babel-loader?cacheDirectory=true']
   },
   {
     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/, // demo: .jpg?xxx
